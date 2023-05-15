@@ -1,6 +1,6 @@
 resource "aws_eks_cluster" "cluster" {
   name     = "${var.name}-cluster"
-  version  = "1.21"
+  version  = "1.26"
   role_arn = aws_iam_role.eks_cluster_role.arn
 
   vpc_config {
@@ -39,5 +39,11 @@ resource "aws_eks_node_group" "node" {
 
   tags = {
     Name = "eks-${var.name}-nodes"
+  }
+
+  lifecycle {
+    ignore_changes = [
+      scaling_config[0].desired_size
+    ]
   }
 }

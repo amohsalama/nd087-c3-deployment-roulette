@@ -5,13 +5,6 @@ provider "kubernetes" {
   token                  = data.aws_eks_cluster_auth.cluster.token
 }
 
-data "aws_eks_cluster" "cluster" {
-  name = module.project_eks.cluster_id
-}
-
-data "aws_eks_cluster_auth" "cluster" {
-  name = module.project_eks.cluster_id
-}
 
 module "project_eks" {
   source             = "./modules/eks"
@@ -19,11 +12,8 @@ module "project_eks" {
   account            = data.aws_caller_identity.current.account_id
   private_subnet_ids = module.vpc.private_subnet_ids
   vpc_id             = module.vpc.vpc_id
-  nodes_desired_size = 2
-  nodes_max_size     = 2
+  nodes_desired_size = 3
+  nodes_max_size     = 3
   nodes_min_size     = 1
 
-  depends_on = [
-    module.vpc,
-  ]
 }

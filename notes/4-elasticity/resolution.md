@@ -1,0 +1,47 @@
+# Bloaty mcface
+
+1. Not all pods were deployed, some are stuck in **Pending** state.
+
+     ![](images/sre3-step4-deployment-issue.png)
+
+2. Since not enough resources were available, we could either scale up or horizontally. Scaling up would require recreation of nodes, that is why i decided to increase node count by one more cheap machine.
+    ![](images/sre3-step4-deployment-fix-issue.png)
+
+3. Output `kubectl get pods --all-namespaces`
+(base) amsalama@LeapMed:/media/amsalama/Data1/mylearning/sre/github_projects/important/nd087-c3-deployment-roulette$ kubectl get pods --all-namespaces
+NAMESPACE     NAME                                  READY   STATUS    RESTARTS   AGE
+kube-system   aws-node-n2r2m                        1/1     Running   0          22s
+kube-system   aws-node-nr7ms                        1/1     Running   0          13m
+kube-system   aws-node-s52qg                        1/1     Running   0          4h47m
+kube-system   cluster-autoscaler-7db86557c7-96pbm   1/1     Running   0          4h43m
+kube-system   coredns-6dff7847bf-jxjtm              1/1     Running   0          5m16s
+kube-system   coredns-6dff7847bf-tx24c              1/1     Running   0          5m15s
+kube-system   kube-proxy-dvp46                      1/1     Running   0          13m
+kube-system   kube-proxy-jtkxc                      1/1     Running   0          4h47m
+kube-system   kube-proxy-k6jtr                      1/1     Running   0          22s
+kube-system   metrics-server-c6bd54f45-gf9jg        1/1     Running   0          5m14s
+udacity       bloaty-mcbloatface-6c5b5fc984-26dkz   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-4qspn   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-4wbd5   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-6k5vq   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-8tw4l   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-8w9cx   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-cddxx   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-ftxt8   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-hjtv5   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-jtxfd   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-l48hm   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-ncrb7   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-nddmg   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-qpvxg   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-smdtb   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-ttb5f   1/1     Running   0          4m47s
+udacity       bloaty-mcbloatface-6c5b5fc984-xs4tl   1/1     Running   0          4m47s
+udacity       canary-v1-546bfbf766-8mmh8            1/1     Running   0          5m14s
+udacity       canary-v1-546bfbf766-qgq85            1/1     Running   0          5m15s
+udacity       canary-v1-546bfbf766-sgvjt            1/1     Running   0          5m15s
+udacity       canary-v2-8dc775cd6-4q5mt             1/1     Running   0          5m14s
+udacity       canary-v2-8dc775cd6-mvq5b             1/1     Running   0          5m16s
+udacity       canary-v2-8dc775cd6-nwtrz             1/1     Running   0          5m15s
+udacity       green-568777db7-nzdbt                 1/1     Running   0          5m15s
+udacity       hello-world-6c74b69bb4-fcbjj          1/1     Running   0          5m15s
